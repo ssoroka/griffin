@@ -1,0 +1,7 @@
+griffin:
+  frequency: 3 # minutes
+  sticky: true
+  twitter:
+    username: twitter-username
+    password: twitter-password
+  
