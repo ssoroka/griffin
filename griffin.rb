@@ -49,20 +49,22 @@ def debug(msg)
   end
 end
 
+first_run = true
 while true do
   debug '.'
   xml = call_twitter(:friends_timeline)
   debug ','
   unless xml.nil?
     doc = YAML.load(XmlSimple.xml_in(xml).to_yaml)
-    doc['status'].reverse.each do |status|
+    doc['status'].each do |status|
       debug '/'
       # debug status.inspect
       if status['user']
-        if Time.parse(status['created_at'].to_s) > last_fetch
+        if Time.parse(status['created_at'].to_s) > last_fetch || first_run
           debug '\\'
           g.notify "squawk Notification", status['user'][0]['name'].to_s, status['text'].to_s, 0, $config['sticky'] # sticky is broken. FCK!
           # status['user'][0]['profile_image_url'] has image url!
+          first_run = false
         end
       end
     end
