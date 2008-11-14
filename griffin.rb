@@ -7,7 +7,7 @@ require 'ruby-growl'
 require 'time'
 require 'yaml'
 
-$debug = true
+$debug = false
 
 $yaml_file = File.join(File.dirname(__FILE__), 'griffin.yml')
 unless File.exist?($yaml_file)
